@@ -26,7 +26,6 @@ class Window(Frame):
         self.can.grid(row = 0, column = 0)
     def draw_circle(self,x,y,r):
         """draw a circle a circle"""
-        print("hello")
         self.can.create_oval((x-r,y-r,x+r,y+r))
 
 
