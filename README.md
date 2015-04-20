@@ -1,2 +1,1 @@
-# hom_event
-Code we will use at the Hands On Museum programming event
+![](sample.jpg "Sample program using this library, with output")
