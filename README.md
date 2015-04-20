@@ -1,1 +1,1 @@
-![](sample.jpg "Sample program using this library, with output")
+![](sample.png "Sample program using this library, with output")
