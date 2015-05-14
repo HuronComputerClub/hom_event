@@ -31,18 +31,18 @@ class Window(Frame):
         self.bind("<Key>", self._key)
     def _key(self, event):
         print ("pressed", repr(event.char))
-    def draw_circle(self,x,y,r,color = ""):
+    def draw_circle(self,x,y,r,color = "",border="black"):
         """draw a circle at point (x,y) with radius r"""
         y = self.height-y
-        self.can.create_oval((x-r,y-r,x+r,y+r), fill = color)
+        self.can.create_oval((x-r,y-r,x+r,y+r), fill=color, outline=border)
     def write(self,x,y,text,size=20,color="black"):
         """draw text at a point (x,y)"""
         y = self.height-y
         self.can.create_text((x,y), text=text, anchor=NW, font=("Arial",size), fill=color)
-    def draw_rectangle(self, x, y, width, height, color = ""):
+    def draw_rectangle(self, x, y, width, height, color = "", border="black"):
         y = self.height-y
         w = width/2
         h = height/2
-        self.can.create_rectangle(x-w,y+h,x+w,y-h,fill=color)
+        self.can.create_rectangle(x-w,y+h,x+w,y-h,fill=color, outline=border)
 
 
