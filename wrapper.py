@@ -12,14 +12,16 @@ def create_window():
     root = Tk()
     root.title("Python Canvas")
     win = Window(root)
+    root.withdraw()
+    win.protocol('WM_DELETE_WINDOW', root.destroy)
     return win
 
 def run(win):
     win.mainloop()
 
-class Window(Frame):
+class Window(Toplevel):
     def __init__(self, master):
-        Frame.__init__(self, master)
+        Toplevel.__init__(self, master)
         self.grid()
         self._setup()
     def _setup(self):
@@ -29,8 +31,33 @@ class Window(Frame):
         self.can = Canvas(self, width=self.width, height = self.height, bg="#ffffff")
         self.can.grid(row = 0, column = 0)
         self.bind("<Key>", self._key)
+        self.bindings = {}
+        self.idle()
+    def idle(self):
+        self.after(100, self.idle)
     def _key(self, event):
-        print ("pressed", repr(event.char))
+        import inspect
+        funcs = self.bindings.get('', []) + self.bindings.get(event.char, [])
+        for i, f in enumerate(funcs):
+            try:
+                if len(inspect.getargspec(f).args) == 1:
+                    f(event.char)
+                else:
+                    f()
+            except Exception as e:
+                print('Error in callback #%i: %s' % (i, e))
+
+    def bind_key(self, *args):
+        if len(args) == 1 and hasattr(args[0], '__call__'):
+            if not '' in self.bindings:
+                self.bindings[''] = []
+            self.bindings[''].append(args[0])
+        elif len(args) == 2 and isinstance(args[0], str) and hasattr(args[1], '__call__'):
+            if not args[0] in self.bindings:
+                self.bindings[args[0]] = []
+            self.bindings[args[0]].append(args[1])
+        else:
+            raise TypeError('Invalid argument types: %s' % ', '.join(str(type(a)) for a in args))
     def draw_circle(self,x,y,r,color = "",border="black"):
         """draw a circle at point (x,y) with radius r"""
         y = self.height-y
