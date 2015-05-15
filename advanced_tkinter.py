@@ -12,7 +12,7 @@ def len2(s):
 
 def printkey(key):
     print("pressed",key)
-window.bind_key(printkey)
+#window.bind_key(printkey)
 
 #Draws a grid of colored squares
 def grid():
@@ -52,14 +52,31 @@ def circles():
         
         window.draw_circle(250,250,rad,c,"")
 
-global x
-x = 10
+x = 20
 def put(letter):
+    global x
     window.write(x,250,letter)
-    x+=10
-def move():
+    x+=20
+def type():
     window.write(10,250,"|")
     window.bind_key(put)
 
-move()
+shade = 0
+def change_shade():
+    window.bind_key("w",inc_shade)
+    window.bind_key("s",dec_shade)
+def inc_shade():
+    global shade
+    if shade<255:
+        shade+=1
+    c="#0000"+len2(shade)
+    window.draw_rectangle(250,250,400,400,c,"black")
+def dec_shade():
+    global shade
+    if shade>0:
+        shade-=1
+    c="#0000"+len2(shade)
+    window.draw_rectangle(250,250,400,400,c,"black")
+
+change_shade()
 run(window)
