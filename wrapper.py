@@ -71,5 +71,11 @@ class Window(Toplevel):
         w = width/2
         h = height/2
         self.can.create_rectangle(x-w,y+h,x+w,y-h,fill=color, outline=border)
+    def draw_line(self,x1,y1,x2,y2,color="black"):
+        y1 = self.height - y1
+        y2 = self.height - y2
+        self.can.create_line(x1,y1,x2,y2,fill=color,width=2)
+    def clear(self,*args):
+        self.can.delete("all")
 
 

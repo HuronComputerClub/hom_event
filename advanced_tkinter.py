@@ -57,7 +57,7 @@ def put(letter):
     global x
     window.write(x,250,letter)
     x+=20
-def type():
+def typing():
     window.write(10,250,"|")
     window.bind_key(put)
 
@@ -65,6 +65,7 @@ shade = 0
 def change_shade():
     window.bind_key("w",inc_shade)
     window.bind_key("s",dec_shade)
+    window.bind_key("c",window.clear)
 def inc_shade():
     global shade
     if shade<255:
@@ -78,5 +79,16 @@ def dec_shade():
     c="#0000"+len2(shade)
     window.draw_rectangle(250,250,400,400,c,"black")
 
-change_shade()
+def lines():
+    for i in range(1000):
+        r=len2(random.randint(0,255))
+        b=len2(random.randint(0,255))
+        g=len2(random.randint(0,255))
+        color = "#"+r+g+b
+        w=random.randint(0,500)
+        x=random.randint(0,500)
+        y=random.randint(0,500)
+        z=random.randint(0,500)
+        window.draw_line(w,x,y,z,color)
+lines()
 run(window)
