@@ -80,7 +80,7 @@ def dec_shade():
     window.draw_rectangle(250,250,400,400,c,"black")
 
 def lines():
-    for i in range(1000):
+    for i in range(500):
         r=len2(random.randint(0,255))
         b=len2(random.randint(0,255))
         g=len2(random.randint(0,255))
