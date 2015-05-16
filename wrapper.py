@@ -60,29 +60,45 @@ class Window(Toplevel):
             raise TypeError('Invalid argument types: %s' % ', '.join(str(type(a)) for a in args))
     def draw_circle(self,x,y,r,color = "",border="black"):
         """draw a circle at point (x,y) with radius r"""
+        color = self.rgb_to_hex(color)
+        border = self.rgb_to_hex(border)
         y = self.height-y
         self.can.create_oval((x-r,y-r,x+r,y+r), fill=color, outline=border)
     def write(self,x,y,text,size=20,color="black"):
         """draw text at a point (x,y)"""
+        color = self.rgb_to_hex(color)
         y = self.height-y
         self.can.create_text((x,y), text=text, anchor=NW, font=("Arial",size), fill=color)
     def draw_rectangle(self, x, y, width, height, color = "", border="black"):
-        #ALL QUESTIONABLE STUFF UNDER HERE
-        rgb = self.winfo_rgb(color)
-        red, green, blue = rgb[0]/256, rgb[1]/256, rgb[2]/256
-        def rgb_to_hex(rgb):
-            return '#%02x%02x%02x' % rgb
-        color = rgb_to_hex((red, green, blue))
-        #END OF QUESTIONABLE STUFF
+        color = self.rgb_to_hex(color)
+        border = self.rgb_to_hex(border)
         y = self.height-y
         w = width/2
         h = height/2
         self.can.create_rectangle(x-w,y+h,x+w,y-h,fill=color, outline=border)
     def draw_line(self,x1,y1,x2,y2,color="black"):
+        color = self.rgb_to_hex(color)
         y1 = self.height - y1
         y2 = self.height - y2
         self.can.create_line(x1,y1,x2,y2,fill=color,width=2)
     def clear(self,*args):
         self.can.delete("all")
 
+    def _pad(self, s):
+        s = hex(int(s))[2:4]
+        if len(s) == 1:
+            s = "0"+s
+        return s
+    def rgb_to_hex(self,rgb):
+        """accepts a color name or rgb tuple and returns hex, or the color name"""
+        if type(rgb)==type((0,0,0)):
+            r=self._pad(rgb[0])
+            g=self._pad(rgb[1])
+            b=self._pad(rgb[2])
+            c = "#"+r+g+b
+            return c
+        elif type(rgb)==type("000"):
+            return rgb
+        else:
+            print(type(rgb))
 

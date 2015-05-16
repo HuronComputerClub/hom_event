@@ -4,11 +4,11 @@ from wrapper import * #import the library
 
 window = create_window()
 
-def len2(s):
-    s = hex(s)[2:]
-    if len(s) == 1:
-        s = "0"+s
-    return s
+##def len2(s):
+##    s = hex(s)[2:]
+##    if len(s) == 1:
+##        s = "0"+s
+##    return s
 
 def printkey(key):
     print("pressed",key)
@@ -38,19 +38,13 @@ def gradient():
             window.draw_rectangle(x,y,3,3,c,"")
 
 #draws concentric circles
-def circles():            
+def circles():
     for rad in range(255,0,-2):
-        r=len2(int(255))
-        b=len2(int(rad))
-        g=len2(int(rad))
-        c = "#"+r+g+b
+        r=255
+        b=rad
+        g=rad
         
-##        r = len2(random.randint(0,255))
-##        g = len2(random.randint(0,255))
-##        b = len2(random.randint(0,255))
-##        c = "#"+r+g+b
-        
-        window.draw_circle(250,250,rad,c,"")
+        window.draw_circle(250,250,rad,(r,g,b),"")
 
 x = 20
 def put(letter):
@@ -68,16 +62,14 @@ def change_shade():
     window.bind_key("c",window.clear)
 def inc_shade():
     global shade
-    if shade<255:
-        shade+=1
-    c="#0000"+len2(shade)
-    window.draw_rectangle(250,250,400,400,c,"black")
+    if shade<254:
+        shade+=2
+    window.draw_rectangle(250,250,400,400,(0,0,shade),"black")
 def dec_shade():
     global shade
-    if shade>0:
-        shade-=1
-    c="#0000"+len2(shade)
-    window.draw_rectangle(250,250,400,400,c,"black")
+    if shade>1:
+        shade-=2
+    window.draw_rectangle(250,250,400,400,(0,0,shade),"black")
 
 def lines():
     for i in range(500):
@@ -90,5 +82,5 @@ def lines():
         y=random.randint(0,500)
         z=random.randint(0,500)
         window.draw_line(w,x,y,z,color)
-lines()
+change_shade()
 run(window)
