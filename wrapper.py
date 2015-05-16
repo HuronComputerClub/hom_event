@@ -67,6 +67,13 @@ class Window(Toplevel):
         y = self.height-y
         self.can.create_text((x,y), text=text, anchor=NW, font=("Arial",size), fill=color)
     def draw_rectangle(self, x, y, width, height, color = "", border="black"):
+        #ALL QUESTIONABLE STUFF UNDER HERE
+        rgb = self.winfo_rgb(color)
+        red, green, blue = rgb[0]/256, rgb[1]/256, rgb[2]/256
+        def rgb_to_hex(rgb):
+            return '#%02x%02x%02x' % rgb
+        color = rgb_to_hex((red, green, blue))
+        #END OF QUESTIONABLE STUFF
         y = self.height-y
         w = width/2
         h = height/2
