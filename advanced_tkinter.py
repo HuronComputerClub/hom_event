@@ -73,6 +73,35 @@ def lines():
         y=random.randint(0,500)
         z=random.randint(0,500)
         window.draw_line(w,x,y,z,(r,g,b))
-        
-grid()
+
+mv_x = 250
+mv_y = 250
+def mv_draw():
+    global mv_x
+    global mv_y
+    window.clear()
+    window.draw_rectangle(mv_x,mv_y,20,20,"red","black")
+def move():
+    window.bind_key("w",mv_u)
+    window.bind_key("a",mv_l)
+    window.bind_key("s",mv_d)
+    window.bind_key("d",mv_r)
+    mv_draw()
+def mv_u():
+    global mv_y
+    mv_y+=3
+    mv_draw()
+def mv_d():
+    global mv_y
+    mv_y-=3
+    mv_draw()
+def mv_l():
+    global mv_x
+    mv_x-=3
+    mv_draw()
+def mv_r():
+    global mv_x
+    mv_x+=3
+    mv_draw()
+move()
 run(window)
