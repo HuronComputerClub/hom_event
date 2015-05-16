@@ -4,12 +4,6 @@ from wrapper import * #import the library
 
 window = create_window()
 
-##def len2(s):
-##    s = hex(s)[2:]
-##    if len(s) == 1:
-##        s = "0"+s
-##    return s
-
 def printkey(key):
     print("pressed",key)
 #window.bind_key(printkey)
@@ -18,24 +12,21 @@ def printkey(key):
 def grid():
     for y in range(0,500,10):
         for x in range(0,500,10):
-            r=len2(random.randint(0,255))
-            b=len2(random.randint(0,255))
-            g=len2(random.randint(0,255))
-            c = "#"+r+g+b
+            r=random.randint(0,255)
+            b=random.randint(0,255)
+            g=random.randint(0,255)
 
-            window.draw_rectangle(x,y,8,8,c,"")
+            window.draw_rectangle(x,y,8,8,(r,g,b),"")
 
 #draws a color gradient
 def gradient():
     for y in range(0,500,3):
         for x in range(0,500,3):
-            b=len2(int(y/3.92)+int((500-x)/3.92))
-            g=len2(int((500-y)/3.92)+int((x)/3.92))
-            r=len2(0)
+            b=int(y/3.92)+int((500-x)/3.92)
+            g=int((500-y)/3.92)+int((x)/3.92)
+            r=0
             
-            c = "#"+r+g+b
-            
-            window.draw_rectangle(x,y,3,3,c,"")
+            window.draw_rectangle(x,y,3,3,(r,g,b),"")
 
 #draws concentric circles
 def circles():
@@ -73,14 +64,15 @@ def dec_shade():
 
 def lines():
     for i in range(500):
-        r=len2(random.randint(0,255))
-        b=len2(random.randint(0,255))
-        g=len2(random.randint(0,255))
-        color = "#"+r+g+b
+        r=random.randint(0,255)
+        b=random.randint(0,255)
+        g=random.randint(0,255)
+
         w=random.randint(0,500)
         x=random.randint(0,500)
         y=random.randint(0,500)
         z=random.randint(0,500)
-        window.draw_line(w,x,y,z,color)
-change_shade()
+        window.draw_line(w,x,y,z,(r,g,b))
+        
+grid()
 run(window)

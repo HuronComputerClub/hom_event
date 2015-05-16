@@ -100,5 +100,5 @@ class Window(Toplevel):
         elif type(rgb)==type("000"):
             return rgb
         else:
-            print(type(rgb))
+            return "#000000"
 
