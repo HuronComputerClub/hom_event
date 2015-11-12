@@ -26,7 +26,7 @@ def gradient():
             g=int((500-y)/3.92)+int((x)/3.92)
             r=0
             
-            window.draw_rectangle(x,y,3,3,(r,g,b),"")
+            window.draw_rectangle(x,y,4,4,(r,g,b),"")
 
 #draws concentric circles
 def circles():
@@ -37,6 +37,7 @@ def circles():
         
         window.draw_circle(250,250,rad,(r,g,b),"")
 
+#types on the canvas
 x = 20
 def put(letter):
     global x
@@ -46,6 +47,7 @@ def typing():
     window.write(10,250,"|")
     window.bind_key(put)
 
+#change the color of a square with w and s
 shade = 0
 def change_shade():
     window.bind_key("w",inc_shade)
@@ -62,6 +64,7 @@ def dec_shade():
         shade-=2
     window.draw_rectangle(250,250,400,400,(0,0,shade),"black")
 
+#draw a bunch of random lines
 def lines():
     for i in range(500):
         r=random.randint(0,255)
@@ -74,6 +77,7 @@ def lines():
         z=random.randint(0,500)
         window.draw_line(w,x,y,z,(r,g,b))
 
+#move a square with wasd
 mv_x = 250
 mv_y = 250
 def mv_draw():
@@ -103,5 +107,6 @@ def mv_r():
     global mv_x
     mv_x+=3
     mv_draw()
-move()
+    
+gradient()
 run(window)

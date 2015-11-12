@@ -91,13 +91,13 @@ class Window(Toplevel):
         return s
     def rgb_to_hex(self,rgb):
         """accepts a color name or rgb tuple and returns hex, or the color name"""
-        if type(rgb)==type((0,0,0)):
+        if isinstance(rgb, tuple):
             r=self._pad(rgb[0])
             g=self._pad(rgb[1])
             b=self._pad(rgb[2])
             c = "#"+r+g+b
             return c
-        elif type(rgb)==type("000"):
+        elif isinstance(rgb, str):
             return rgb
         else:
             return "#000000"
