@@ -14,7 +14,8 @@ guess = int((high+low)/2) #the first guess, can make this randint(low,high) too
 response = ""
 while response != "c":
 
-    response = input("Is it " + str(guess) + "? (h=too high, l=too low, c=correct) ")
+    while not (response in "lhc" and len(response) == 1):
+        response = input("Is it " + str(guess) + "? (h=too high, l=too low, c=correct) ")
 
     if response == "l":
         low = guess + 1
