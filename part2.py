@@ -13,10 +13,12 @@ guess = int((high+low)/2) #the first guess, can make this randint(low,high) too
 
 response = ""
 while response != "c":
-    response = ""
-    while response!="l" and response!="h" and response!="c":
-        response = input("Is it " + str(guess) + "? (h=too high, l=too low, c=correct) ")
+    response = input("\nIs it " + str(guess) + "? (h=too high, l=too low, c=correct) ")
 
+    if response!="l" and response!="h" and response!="c":
+        print("invalid response. Please enter 'l', 'h', or 'c'")
+        count -= 1
+        
     if response == "l":
         low = guess + 1
     elif response == "h":
